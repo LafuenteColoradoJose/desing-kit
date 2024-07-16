@@ -2,15 +2,16 @@
 	// Supports weights 300-800
 	import '@fontsource-variable/merriweather-sans';
 	import '@fontsource/poppins';
+    import NavBar from '../components/nav-bar.svelte';
 </script>
 
+<header>
+    <h1>Desing Kit</h1>
+    <NavBar />
+</header>
 
 <main>
-    <nav class="flex flex-col">
-        <a href="/">Home</a>
-        <a href="/gradients">Degradados</a>
-        <a href="/patterns">Backgrounds</a>
-    </nav>
+   
 
     <slot />
 
