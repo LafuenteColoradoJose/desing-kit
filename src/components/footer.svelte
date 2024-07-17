@@ -7,7 +7,7 @@
 			<img src="/svelte-1.svg" alt="svelte" class="w-4 h-auto" />
 			<stron>José Lafuente</stron>
 		</article>
-        <p>Este es el footer de la página</p>
+		<p>Este es el footer de la página</p>
 	</section>
 </footer>
 

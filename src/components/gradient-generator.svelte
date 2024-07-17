@@ -1,9 +1,10 @@
 <script>
     import { onMount } from 'svelte';
+    import generateRandomColor from '../utils/colors/generateRandomColor';
 
-    let color1 = "#3498db";
-    let color2 = "#ffffff";
-    let color3 = "#000000";
+    let color1 = generateRandomColor();
+    let color2 = generateRandomColor();
+    let color3 = generateRandomColor();
     let direction = "to right";
     let gradientCSS = "";
 
@@ -29,23 +30,25 @@
     onMount(generateGradient);
 </script>
 
-<div id="gradient">
+<div id="gradient" class="flex flex-col justify-center items-center gap-2">
     <h1>Generador de Degradados</h1>
-    <label>
-        Color 1:
-        <input type="color" bind:value={color1}>
-    </label>
-    <br>
-    <label>
-        Color 2:
-        <input type="color" bind:value={color2}>
-    </label>
-    <br>
-    <label>
-        Color 3:
-        <input type="color" bind:value={color3}>
-    </label>
-    <br>
+    <div class="flex flex-col justify-center items-center md:flex-row">
+        <label>
+            Color 1:
+            <input type="color" bind:value={color1}>
+        </label>
+        <br>
+        <label>
+            Color 2:
+            <input type="color" bind:value={color2}>
+        </label>
+        <br>
+        <label>
+            Color 3:
+            <input type="color" bind:value={color3}>
+        </label>
+    </div>
+
     <label>
         Dirección:
         <select bind:value={direction}>
@@ -77,7 +80,6 @@
         align-items: center;
         padding: 10px;
         text-align: center;
-        background: aliceblue;
         
     }
 

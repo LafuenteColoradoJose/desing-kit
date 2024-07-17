@@ -1,9 +1,10 @@
 <script>
-
+    import PalleteColors from '../../components/pallete-colors.svelte';
+    import { fade } from 'svelte/transition';
 </script>
 
-<div>
-
+<div in:fade={{ duration: 500 }} >
+    <PalleteColors />
 </div>
 
 <style>

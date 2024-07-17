@@ -1,16 +1,25 @@
 <script>
-
-</script>
-
-<nav class="flex flex-row justify-around items-center text-lg bg-[#a5954d] ">
-    <a href="/">Home</a>
-    <a href="/colors">Colores</a>
-    <a href="/gradients">Degradados</a>
-    <a href="/patterns">Backgrounds</a>
-</nav>
-
-<style>
-
-</style>
-
-
+    import { page } from '$app/stores';
+  </script>
+  
+  <nav class="shadow" >
+      <div class="container flex items-center justify-center p-6 mx-auto gap-2" >
+          <a href="/" class="{($page.url.pathname === '/') ? 'active' : ''}">Inicio</a>
+  
+          <a href="/colors" class="{($page.url.pathname === '/colors') ? 'active' : ''}">Colores</a>
+  
+          <a href="/gradients" class="{($page.url.pathname === '/gradients') ? 'active' : ''}">Degradados</a>
+  
+          <a href="/patterns" class="{($page.url.pathname === '/patterns') ? 'active' : ''}">Fondos</a>
+      </div>
+  </nav>
+  
+  <style>
+      a {
+          color: #a5694d;
+      }
+      .active {
+          color: #d35400;
+          font-weight: bold;
+      }
+  </style>

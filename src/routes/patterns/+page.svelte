@@ -1,13 +1,13 @@
 <script>
-
+    import { fade } from "svelte/transition";
+	import Backgrounds from "../../components/backgrounds.svelte";
 </script>
 
-<div>
-patrones
+<div in:fade={{ duration: 500 }}>
+	<Backgrounds />
 </div>
 
 <style>
-
 </style>
 
 
