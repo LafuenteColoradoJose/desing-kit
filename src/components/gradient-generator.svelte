@@ -8,6 +8,13 @@
     let direction = "to right";
     let gradientCSS = "";
 
+    function updateBaseColors() {
+        color1 = generateRandomColor();
+        color2 = generateRandomColor();
+        color3 = generateRandomColor();
+        generateGradient();
+    }
+
     function generateGradient() {
         const colors = [color1, color2, color3].filter(color => color);
         gradientCSS = `linear-gradient(${direction}, ${colors.join(', ')})`;
@@ -23,16 +30,18 @@
         div.style.cssText = `width: 100%; height: 100dvh; background: ${gradientCSS}; position: fixed; top: 0; left: 0; z-index: 9999;`;
         document.body.appendChild(div);
         setTimeout(() => document.body.removeChild(div), 3000);
-
     }
 
-    // Generar el degradado inicial al cargar la página
     onMount(generateGradient);
 </script>
 
-<div id="gradient" class="flex flex-col justify-center items-center gap-2">
+<div id="gradient" class="flex flex-col justify-center items-center gap-2 mb-4">
     <h1>Generador de Degradados</h1>
-    <div class="flex flex-col justify-center items-center md:flex-row">
+    <div class="flex flex-col justify-center items-center gap-2 md:flex-row">
+        <button
+			on:click={updateBaseColors}
+			class="border-2 border-[#4d8fa5] rounded-2xl p-1 ">Colores Aleatorios</button
+		>
         <label>
             Color 1:
             <input type="color" bind:value={color1}>
@@ -62,50 +71,16 @@
             <option value="to bottom left">Hacia abajo izquierda</option>
         </select>
     </label>
-    <br>
-    <button on:click={generateGradient}>Generar Degradado</button>
-    <br>
-    <button on:click={probarDegradado}>Probar Degradado</button>
-    <div id="gradientPreview" style="background: {gradientCSS}"></div>
-    <textarea id="cssCode" readonly>{`background: ${gradientCSS};`}</textarea>
-    <button on:click={copyCSS}>Copiar CSS</button>
+    <div class="flex flex-row justify-center items-center gap-2">
+        <button on:click={generateGradient} class="border-2 border-[#4d8fa5] rounded-2xl p-1 ">Generar Degradado</button>
+        <button on:click={probarDegradado} class="border-2 border-[#4d8fa5] rounded-2xl p-1 ">Probar Degradado</button>
+    </div>
+    <div class="w-2/3 h-24 md:h-28 lg:h-32"  style="background: {gradientCSS}"></div>
+    <span class="text-center font-extralight mt-3" readonly>{`background: ${gradientCSS};`} </span>
+    <button on:click={copyCSS} class="border-2 border-[#4d8fa5] rounded-2xl p-1 ">Copiar CSS</button>
 </div>
 
 <style>
-    #gradient {
-        
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 10px;
-        text-align: center;
-        
-    }
-
-    #gradientPreview {
-        width: 100%;
-        height: 150px;
-        margin-top: 20px;
-        border: 1px solid #ccc;
-    }
-
-    #cssCode {
-        width: 60%;
-        height: 100px;
-        margin-top: 10px;
-    }
-
-    button {
-        margin-top: 10px;
-        padding: 10px 20px;
-        background: #3498db;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
     input, select {
         padding: 2px;
         margin: 5px;
