@@ -30,6 +30,7 @@
 	"dependencies": {
 		"@fontsource-variable/merriweather-sans": "^5.0.14",
 		"@fontsource/poppins": "^5.0.14",
-		"svelte-icons": "^2.1.0"
+		"svelte-icons": "^2.1.0",
+		"sweetalert2": "^11.6.13"
 	}
 }

@@ -15,6 +15,8 @@
             svgContent = generateStripesPattern(baseColor, width, height);
         } else if (pattern === 'dots') {
             svgContent = generateDotsPattern(baseColor, width, height);
+        } else if (pattern === 'triangles') {
+            svgContent = generateTrianglesPattern(baseColor, width, height);
         }
 
         const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">${svgContent}</svg>`;
@@ -24,9 +26,16 @@
     }
 
     function generateStripesPattern(color, width, height) {
+        let pattern = '';
+        for (let x = 0; x < width; x += 50) {
+            pattern += `<path d="M${x} 0 L${x} ${height}" stroke="white" stroke-width="1" />`;
+        }
+        for (let y = 0; y < height; y += 50) {
+            pattern += `<path d="M0 ${y} L${width} ${y}" stroke="white" stroke-width="1" />`;
+        }
         return `
             <rect width="${width}" height="${height}" fill="${color}" />
-            <path d="M0 0 L${width} ${height} M${width} 0 L0 ${height}" stroke="white" stroke-width="10" />
+            ${pattern}
         `;
     }
 
@@ -34,35 +43,50 @@
         let pattern = '';
         for (let y = 0; y < height; y += 50) {
             for (let x = 0; x < width; x += 50) {
-                pattern += `<circle cx="${x}" cy="${y}" r="20" fill="white" />`;
+                pattern += `<circle cx="${x}" cy="${y}" r="5" fill="white" />`;
             }
         }
         return `<rect width="${width}" height="${height}" fill="${color}" />${pattern}`;
     }
 
+    function generateTrianglesPattern(color, width, height) {
+        let pattern = '';
+        for (let y = 0; y < height; y += 50) {
+            for (let x = 0; x < width; x += 50) {
+                pattern += `
+                    <polygon points="${x},${y} ${x + 50},${y} ${x},${y + 50}" fill="${color}" />
+                    <polygon points="${x + 50},${y} ${x + 50},${y + 50} ${x},${y + 50}" fill="white" />
+                `;
+            }
+        }
+        return `<rect width="${width}" height="${height}" fill="${color}" />${pattern}`;
+    }
+
+    function updateBaseColor() {
+        baseColor = generateRandomColor();
+        generateSvg();
+    }
+
     $: generateSvg();
 </script>
 
-<style>
-    .preview {
-        width: 100%;
-        max-width: 800px;
-        height: auto;
-        margin: 20px 0;
-        border: 1px solid #ddd;
-    }
-</style>
-
-<div>
+<div class="flex flex-col justify-center items-center gap-2">
+    <h1 class="text-center">Generador de Fondos</h1>
     <label>
         Color base: 
         <input type="color" bind:value={baseColor}>
     </label>
+    <button
+    on:click={updateBaseColor}
+    style="border: 2px solid {baseColor};"
+    class="border-2 rounded-2xl p-1">Color Aleatorio</button
+    >
     <label>
         Patrón: 
         <select bind:value={pattern}>
             <option value="stripes">Rayas</option>
             <option value="dots">Puntos</option>
+            <option value="triangles">Triángulos</option>
         </select>
     </label>
     <label>
@@ -73,7 +97,8 @@
         Alto: 
         <input type="number" bind:value={height} min="1">
     </label>
-    <button on:click={generateSvg}>Generar Background</button>
+    <button style="border: 2px solid {baseColor};"
+    class="border-2 rounded-2xl p-1" on:click={generateSvg}>Generar Background</button>
 </div>
 
 <div class="preview">
@@ -83,3 +108,13 @@
 <div>
     <a href={$svgDataUrl} download="background.svg">Descargar SVG</a>
 </div>
+    
+    <style>
+        .preview {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            margin: 20px 0;
+            border: 1px solid #ddd;
+        }
+    </style>

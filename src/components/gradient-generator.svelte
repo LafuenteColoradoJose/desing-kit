@@ -1,89 +1,139 @@
 <script>
-    import { onMount } from 'svelte';
-    import generateRandomColor from '../utils/colors/generateRandomColor';
+	import generateRandomColor from '../utils/colors/generateRandomColor';
+	import Swal from 'sweetalert2';
 
-    let color1 = generateRandomColor();
-    let color2 = generateRandomColor();
-    let color3 = generateRandomColor();
-    let direction = "to right";
-    let gradientCSS = "";
+	let color1 = generateRandomColor();
+	let color2 = generateRandomColor();
+	let color3 = generateRandomColor();
+	let color4 = generateRandomColor();
 
-    function updateBaseColors() {
-        color1 = generateRandomColor();
-        color2 = generateRandomColor();
-        color3 = generateRandomColor();
-        generateGradient();
-    }
+	let colors = [color1, color2, color3, color4];
+	let deg = 45;
+	let getCss = false;
+	let getTryGradient = false;
 
-    function generateGradient() {
-        const colors = [color1, color2, color3].filter(color => color);
-        gradientCSS = `linear-gradient(${direction}, ${colors.join(', ')})`;
-    }
+	let background = `linear-gradient(${deg}deg, ${colors[0]}, ${colors[1]}, ${colors[2]}, ${colors[3]})`;
 
-    function copyCSS() {
-        navigator.clipboard.writeText(`background: ${gradientCSS};`);
-        alert('Código CSS copiado al portapapeles');
-    }
+	// 	Convert deg number to string for CSS
+	$: degString = `${deg}deg`;
 
-    function probarDegradado() {
-        const div = document.createElement('div');
-        div.style.cssText = `width: 100%; height: 100dvh; background: ${gradientCSS}; position: fixed; top: 0; left: 0; z-index: 9999;`;
-        document.body.appendChild(div);
-        setTimeout(() => document.body.removeChild(div), 3000);
-    }
+	function randomColors() {
+		colors = colors.map(() => generateRandomColor());
+	}
 
-    onMount(generateGradient);
+	function generateCss() {
+		return `
+            #gradientAnimation {
+                margin: 10px;
+                width: 200px;
+                height: 200px;
+                border: 2px solid black;
+                background: linear-gradient(
+                    ${deg}deg,
+                    ${colors[0]},
+                    ${colors[1]},
+                    ${colors[2]},
+                    ${colors[3]}
+                );
+                background-size: 200% 200%;
+                animation: zoomGradient 15s ease infinite;
+            }
+
+            @keyframes zoomGradient {
+                0%, 100% {
+                    background-size: 200% 200%;
+                }
+                50% {
+                    background-size: 100% 100%;
+                }
+            }
+        `;
+	}
+
+	function copyToClipboard() {
+		const cssCode = generateCss();
+		navigator.clipboard.writeText(cssCode).then(
+			() => {
+				getCss = true;
+				Swal.fire({
+					title: 'CSS Copiado',
+					text: 'El código CSS ha sido copiado al portapapeles',
+					text: `${cssCode}`,
+					icon: 'success',
+					confirmButtonText: 'Ok'
+				});
+			},
+			(err) => {
+				alert('Error al copiar CSS: ', err);
+			}
+		);
+	}
+
+	
 </script>
 
-<div id="gradient" class="flex flex-col justify-center items-center gap-2 mb-4">
-    <h1>Generador de Degradados</h1>
-    <div class="flex flex-col justify-center items-center gap-2 md:flex-row">
-        <button
-			on:click={updateBaseColors}
-			class="border-2 border-[#4d8fa5] rounded-2xl p-1 ">Colores Aleatorios</button
-		>
-        <label>
-            Color 1:
-            <input type="color" bind:value={color1}>
-        </label>
-        <br>
-        <label>
-            Color 2:
-            <input type="color" bind:value={color2}>
-        </label>
-        <br>
-        <label>
-            Color 3:
-            <input type="color" bind:value={color3}>
-        </label>
-    </div>
+<div id="gradientAnimation"
+ style="
+--deg: {degString};
+--gradient-1:{colors[0]};
+--gradient-2:{colors[1]};
+--gradient-3:{colors[2]};
+--gradient-4:{colors[3]};"
 
-    <label>
-        Dirección:
-        <select bind:value={direction}>
-            <option value="to right">A la derecha</option>
-            <option value="to left">A la izquierda</option>
-            <option value="to top">Hacia arriba</option>
-            <option value="to bottom">Hacia abajo</option>
-            <option value="to top right">Hacia arriba derecha</option>
-            <option value="to top left">Hacia arriba izquierda</option>
-            <option value="to bottom right">Hacia abajo derecha</option>
-            <option value="to bottom left">Hacia abajo izquierda</option>
-        </select>
-    </label>
-    <div class="flex flex-row justify-center items-center gap-2">
-        <button on:click={generateGradient} class="border-2 border-[#4d8fa5] rounded-2xl p-1 ">Generar Degradado</button>
-        <button on:click={probarDegradado} class="border-2 border-[#4d8fa5] rounded-2xl p-1 ">Probar Degradado</button>
-    </div>
-    <div class="w-2/3 h-24 md:h-28 lg:h-32"  style="background: {gradientCSS}"></div>
-    <span class="text-center font-extralight mt-3" readonly>{`background: ${gradientCSS};`} </span>
-    <button on:click={copyCSS} class="border-2 border-[#4d8fa5] rounded-2xl p-1 ">Copiar CSS</button>
+ class="flex flex-col justify-center items-center gap-2 pb-4 h-screen">
+	<h1 >Generador de Degradados</h1>
+	<button on:click={randomColors} class="border-2 border-[#4d8fa5] rounded-2xl p-1"
+		>Colores Aleatorios</button
+	>
+	<label for="color-1">Color 1</label>
+	<input name="color-1" type="color" bind:value={colors[0]} />
+
+	<label for="color-2">Color 2</label>
+	<input name="color-2" type="color" bind:value={colors[1]} />
+
+	<label for="color-3">Color 3</label>
+	<input name="color-3" type="color" bind:value={colors[2]} />
+
+	<label for="color-4">Color 4</label>
+	<input name="color-4" type="color" bind:value={colors[3]} />
+
+	<label for="degrees">Degrees: {deg}</label>
+	<input name="degrees" type="range" min="0" max="360" bind:value={deg} />
+
+
+
+	<button on:click={copyToClipboard} class="border-2 border-[#4d8fa5] rounded-2xl p-1"
+		>Copiar CSS</button
+	>
+	
 </div>
 
 <style>
-    input, select {
-        padding: 2px;
-        margin: 5px;
-    }
-</style>
 
+    h1 {
+        text-shadow: 0.5px 1px 1px white;
+    }
+
+	#gradientAnimation {
+		border: 2px solid black;
+		background: linear-gradient(
+			var(--deg),
+			var(--gradient-1),
+			var(--gradient-2),
+			var(--gradient-3),
+			var(--gradient-4)
+		);
+		background-size: 200% 200%;
+		animation: zoomGradient 15s ease infinite;
+	}
+
+	@keyframes zoomGradient {
+		0%,
+		100% {
+			background-size: 200% 200%;
+		}
+		50% {
+			background-size: 100% 100%;
+		}
+	}
+</style>

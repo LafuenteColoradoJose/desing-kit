@@ -27,8 +27,12 @@
 		font-family: 'Merriweather Sans', sans-serif;
 		color: #4d8fa5;
 		font-weight: 800;
-	}
 
+	}
+	
+	:global(h1) {
+		font-size: 1.4rem;
+	}
 	:global(p, a, span, label, input, select, button) {
 		font-family: 'Poppins', sans-serif;
 	}

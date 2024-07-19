@@ -3,7 +3,7 @@
 	import Backgrounds from "../../components/backgrounds.svelte";
 </script>
 
-<div in:fade={{ duration: 500 }}>
+<div in:fade={{ duration: 500 }} class="p-4">
 	<Backgrounds />
 </div>
 
