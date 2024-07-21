@@ -6,6 +6,14 @@
 	import MdBuild from 'svelte-icons/md/MdBuild.svelte';
 	import '../app.css';
 	import Footer from '../components/footer.svelte';
+	// import { svgDataUrl } from '../stores.js';
+
+	// let svgDataUrl_value;
+
+	// svgDataUrl.subscribe((url) => {
+	// 	svgDataUrl_value = url;
+	// });
+	// console.log(svgDataUrl_value);
 </script>
 
 <header>
@@ -17,6 +25,7 @@
 	</div>
 	<NavBar />
 </header>
+<!-- <main style="background-image: url({svgDataUrl_value});"> -->
 <main>
 	<slot />
 </main>
@@ -54,4 +63,10 @@
 		height: 24px;
 		color: #4d8fa5;
 	}
+
+	/* main {
+		width: 100%;
+		height: 100%;
+		background-size: contain;
+	} */
 </style>
