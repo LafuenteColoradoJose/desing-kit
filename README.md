@@ -77,3 +77,6 @@ We welcome contributions from the community! If you have ideas for new features,
 License
 
 This project is licensed under the MIT License.
+
+"Project deployed on Vercel, try it out!"[]: # (https://desing-kit.vercel.app/)
+```
