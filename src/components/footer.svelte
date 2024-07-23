@@ -2,13 +2,15 @@
 </script>
 
 <footer>
-	<section class="flex flex-row justify-between px-2 items-center bg-[#4d8fa5] text-white h-16">
-		<article class="flex flex-row gap-2">
-			<img src="/svelte-1.svg" alt="svelte" class="w-4 h-auto" />
-			<stron>José Lafuente</stron>
+	<section class="flex flex-row justify-between items-center px-6 bg-[#4d8fa5] text-white w-screen h-16">
+		<article class="flex flex-row gap-6">
+			<a href="https://svelte.dev" target="_blank" rel="noopener noreferrer">
+				<img src="/svelte-1.svg" alt="svelte" class="w-4 h-auto" />
+			</a>
+			<stron><a href="mailto:joselafuente77@gmail.com">José Lafuente</stron>
 		</article>
 
-		<span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
+		<span class="flex flex-row justify-center items-center">
 			<a href="https://www.linkedin.com/in/joselafuentecolorado/" target="_blank" class="ml-3">
 			  <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="0" class="w-5 h-5" viewBox="0 0 24 24">
 				<path stroke="none" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path>

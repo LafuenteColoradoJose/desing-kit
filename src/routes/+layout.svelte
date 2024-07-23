@@ -16,12 +16,12 @@
 	// console.log(svgDataUrl_value);
 </script>
 
-<header>
-	<div class="flex flex-row justify-center items-center bg-[#b2e5f5] gap-2">
+<header class="flex flex-col justify-between w-full h-[100px]">
+	<div class="flex flex-row justify-center items-center bg-[#b2e5f5] gap-2 h-[50px]">
 		<div class="icon">
 			<MdBuild />
 		</div>
-		<h1 class="text-3xl" >Desing Kit</h1>
+		<h1>Desing Kit</h1>
 	</div>
 	<NavBar />
 </header>
@@ -34,13 +34,16 @@
 <style>
 	:global(h1, h2, h3, h4, h5, h6) {
 		font-family: 'Merriweather Sans', sans-serif;
-		color: #4d8fa5;
-		font-weight: 800;
 
 	}
 	
 	:global(h1) {
 		font-size: 1.4rem;
+		text-align: center;
+		font-display: swap;
+		color: black;
+		font-weight: 800;
+		
 	}
 	:global(p, a, span, label, input, select, button) {
 		font-family: 'Poppins', sans-serif;
@@ -55,7 +58,7 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
-		align-items: normal;
+		align-items: center;
 	}
 
 	:global(.icon) {
@@ -64,9 +67,14 @@
 		color: #4d8fa5;
 	}
 
-	/* main {
+	:global(main) {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
 		width: 100%;
-		height: 100%;
-		background-size: contain;
-	} */
+		height: 100dvh;
+	}
+
+	
 </style>

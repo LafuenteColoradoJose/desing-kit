@@ -67,14 +67,10 @@
 	}
 </script>
 
-<div class="flex flex-col justify-center items-center mt-2">
-	<h1 class="text-center">Generador de Colores</h1>
-	<div class="flex flex-col justify-center items-center gap-2 my-4 md:flex-row md:gap-3">
-		<button
-			on:click={updateBaseColor}
-			style="border: 2px solid {baseColor};"
-			class="border-2 rounded-2xl p-1">Color Aleatorio</button
-		>
+<div class="flex flex-col items-center gap-2 h-full sm:justify-center md:gap-10">
+	<h1>Generador de Colores</h1>
+	<div class="flex flex-col justify-center items-center gap-2 md:flex-row md:gap-3">
+		
 		<div class="flex flex-row items-center gap-2">
 			<label for="baseColor"> Color base: </label>
 			<input
@@ -97,35 +93,42 @@
 				<option value="triadic">Triádica</option>
 			</select>
 		</div>
-		<button
-			on:click={generatePalette}
-			style="border: 2px solid {baseColor};"
-			class="border-2 rounded-2xl p-1">Generar Paleta</button
-		>
+		<div>
+			<button
+				on:click={generatePalette}
+				style="border: 2px solid {baseColor};"
+				class="border-2 rounded-2xl p-1">Generar Paleta</button
+			>
+			<button
+				on:click={updateBaseColor}
+				style="border: 2px solid {baseColor};"
+				class="border-2 rounded-2xl p-1">Color Aleatorio</button
+			>
+		</div>
 	</div>
 
-	<div style="border: 2px solid {baseColor};" class="flex flex-col justify-center items-center p-3 border-2 rounded-2xl w-9/12 h-[450px] ">
+	<div style="border: 2px solid {baseColor};" class="flex flex-col justify-center items-center p-3 rounded-2xl w-[82dvw] h-[40dvh]">
 		{#each palette as color}
-			<div class="color" style="background-color: {color};"></div>
-			<div class="flex flex-row gap-3 pl-3">
-				<span>
+			<div class="color w-[70dvw] h-[2dvh] m-2 px-4" style="background-color: {color};"></div>
+			<div class="flex flex-row">
+				<span class="text-base">
 					{color} <br />
 				</span>
-				<span>
+				<span class="text-sm">
 					{hexToRgb(color)}
 				</span>
 			</div>
 		{/each}
 	</div>
+
 </div>
 
 <style>
 	.color {
-		width: 50dvw;
-		height: 5dvh;
 		margin: 10px;
 		padding-left: 10px;
 		border: 2px solid #333;
 		border-radius: 4px;
 	}
+	
 </style>

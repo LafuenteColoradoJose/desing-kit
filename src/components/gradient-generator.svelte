@@ -80,8 +80,8 @@
 --gradient-3:{colors[2]};
 --gradient-4:{colors[3]};"
 
- class="flex flex-col justify-center items-center gap-2 pb-4">
-	<h1 >Generador de Degradados</h1>
+ class="flex flex-col justify-center items-center gap-2 pb-4 w-full h-full">
+	<h1>Generador de Degradados</h1>
 	<button on:click={randomColors} class="border-2 border-[#4d8fa5] rounded-2xl p-1"
 		>Colores Aleatorios</button
 	>
@@ -109,10 +109,6 @@
 </div>
 
 <style>
-
-    h1 {
-        text-shadow: 0.5px 1px 1px white;
-    }
 
 	#gradientAnimation {
 		background: linear-gradient(

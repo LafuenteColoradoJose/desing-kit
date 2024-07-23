@@ -2,7 +2,7 @@
     import { page } from '$app/stores';
   </script>
   
-  <nav class="shadow" >
+  <nav class="flex shadow h-[50px]" >
       <div class="container flex items-center justify-center p-6 mx-auto gap-2" >
           <a href="/" class="{($page.url.pathname === '/') ? 'active' : ''}">Inicio</a>
   

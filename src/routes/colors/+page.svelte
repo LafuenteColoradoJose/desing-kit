@@ -3,7 +3,7 @@
     import { fade } from 'svelte/transition';
 </script>
 
-<div in:fade={{ duration: 500 }} class="pb-4" >
+<div in:fade={{ duration: 500 }} class="flex flex-col justify-between items-center w-full h-full" >
     <PalleteColors />
 </div>
 
